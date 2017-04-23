@@ -1,0 +1,1 @@
+/home/derker/.config/i3
