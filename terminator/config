@@ -1,0 +1,27 @@
+[global_config]
+  always_split_with_profile = True
+  suppress_multiple_term_dialog = True
+[keybindings]
+  split_horiz = <Primary><Alt>Down
+  split_vert = <Primary><Alt>Right
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+[plugins]
+[profiles]
+  [[default]]
+    background_color = "#0d1926"
+    background_darkness = 0.77
+    background_image = /home/derker/Pictures/1111239.jpg
+    background_type = transparent
+    font = Monaco 13
+    foreground_color = "#31b96e"
+    palette = "#363636:#ff0883:#83ff08:#ffb908:#0883ff:#8308ff:#08ff83:#b6b6b6:#424242:#ff1e8e:#8eff1e:#ffdd1e:#1e8eff:#8e1eff:#1eff8e:#c2c2c2"
+    scrollbar_position = hidden
+    show_titlebar = False
+    use_system_font = False
