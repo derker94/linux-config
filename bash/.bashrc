@@ -116,4 +116,12 @@ if ! shopt -oq posix; then
   fi
 fi
 
-PS1="\n\[\e[35m\]#\# \[\e[34m\]\u\[\e[37m\] @ \[\e[33m\]\h \[\e[37m\]in \[\e[32m\]\w \[\e[37m\]at \[\e[35m\]\t\n\[\e[0m\]\$ "
+parse_git_branch() {
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+
+TITLE="${debian_chroot:+($debian_chroot)}\u@\h: \w"
+PS1="\n\[\e[35m\]#\# \[\e[34m\]\u\[\e[37m\] @ \[\e[33m\]\h \[\e[37m\]in \[\e[32m\]\w \[\e[37m\]at \[\e[35m\]\t \[\033[33m\]\$(parse_git_branch)\n\[\e[0m\]\$ "
+PS1="\[\e]0;$TITLE\a\]$PS1"
+
+#PS1="\u@\h \[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
