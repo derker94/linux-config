@@ -135,8 +135,6 @@ bindsym XF86MonBrightnessDown exec --no-startup-id sudo brightness_control -200 
 # lock screen
 bindsym Mod1+Ctrl+l exec i3lock
 
-exec --no-startup-id synclient VertEdgeScroll=1 TapButton1=1 TapButton2=1 TapButton3=1
-
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -168,6 +166,7 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
+bindsym $mod+x move container to output VGA-1-1
 bindsym $mod+r mode "resize"
 bindsym Mod1+Ctrl+s exec --no-startup-id shutter -s
 
@@ -190,4 +189,7 @@ bar {
 	}
 }
 exec --no-startup-id nm-applet
-exec --no-startup-id nitrogen --set-centered /home/derker/Pictures/1111239.jpg
+exec --no-startup-id xrandr --output VGA-1-1 --auto --right-of eDP-1-1
+exec nitrogen --set-scaled --restore
+# exec_always /home/derker/Software/xSwipe/xSwipe.pl
+exec_always --no-startup-id synclient VertTwoFingerScroll=1 HorizTwoFingerScroll=1 TapButton1=1 TapButton2=3 TapButton3=2 MaxDoubleTapTime=60
