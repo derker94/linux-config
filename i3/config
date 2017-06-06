@@ -10,11 +10,12 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
-set $control ~/.config/i3/scripts/workspace_controller.py
+set $workspace_controller ~/.config/i3/scripts/workspace_controller.py
+set $brightness_controller ~/.config/i3/scripts/brightness_controller.sh
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:"DejaVu Sans" 12
+font pango:"PingFang SC" 10
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -106,10 +107,10 @@ bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
-bindsym Mod1+Shift+Left exec $control prev go
-bindsym Mod1+Shift+Right exec $control next go
-bindsym Mod1+Shift+Up exec $control up go
-bindsym Mod1+Shift+Down exec $control down go
+bindsym Mod1+Shift+Left exec $workspace_controller prev go
+bindsym Mod1+Shift+Right exec $workspace_controller next go
+bindsym Mod1+Shift+Up exec $workspace_controller up go
+bindsym Mod1+Shift+Down exec $workspace_controller down go
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
@@ -124,13 +125,13 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # Audio controls
-bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks 
+bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks
 bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks
 bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+1
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec --no-startup-id sudo brightness_control +200 # increase screen brightness
-bindsym XF86MonBrightnessDown exec --no-startup-id sudo brightness_control -200 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec --no-startup-id sudo $brightness_controller +200 # increase screen brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id sudo $brightness_controller -200 # decrease screen brightness
 
 # lock screen
 bindsym Mod1+Ctrl+l exec i3lock
@@ -179,6 +180,7 @@ focus_follows_mouse no
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
+        font pango:"DejaVu Sans" 13
 	status_command i3blocks -c /home/derker/.config/i3/i3blocks.conf
 	tray_padding 4
 	colors{
@@ -191,5 +193,4 @@ bar {
 exec --no-startup-id nm-applet
 exec --no-startup-id xrandr --output VGA-1-1 --auto --right-of eDP-1-1
 exec nitrogen --set-scaled --restore
-# exec_always /home/derker/Software/xSwipe/xSwipe.pl
 exec_always --no-startup-id synclient VertTwoFingerScroll=1 HorizTwoFingerScroll=1 TapButton1=1 TapButton2=3 TapButton3=2 MaxDoubleTapTime=60
